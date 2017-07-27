@@ -1,1 +1,2 @@
 # bilibili_live_danmu_crawler
+ bilibili直播的弹幕抓取
