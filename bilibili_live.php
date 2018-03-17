@@ -113,13 +113,14 @@ class bili{
 	function reader($length){
 		$errorcode = socket_last_error($this->m_socket);
 		if(!$errorcode){
-			try{
+			if($length<65535&&$length>0){
 				if($buffer=socket_read($this->m_socket,$length,PHP_BINARY_READ)){
+					if($length!=4&&$length!=strlen($buffer)){print ($this->output(90002,'msg长度：'.$length." 实际msg长度：".strlen($buffer))."\n");}
 					return $buffer;
 				}
 			}
-			catch(Exception $e){
-				$this->output(99001,"socket read error");
+			else{
+				print ($this->output(99001,"socket read length error：".$length)."\n");
 				$this->reconnect();
 			}
 		   
